@@ -18,12 +18,13 @@ To get started with PHExpress, follow these steps:
 
 2. Create a new PHP file: Create a new PHP file in your project directory and include the following code:
 
+```php
 <?php
  
 // Sample code will be here
 
 ?>
-
+```
 
 ## Documentation
 
