@@ -1,5 +1,5 @@
 <?php 
 $models = [
-    "./testModel.php",
-    "./test2Model.php"
+    "testModel.php",
+    "test2Model.php"
 ];

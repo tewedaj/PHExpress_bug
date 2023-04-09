@@ -6,20 +6,20 @@ include "../util/jsonHelper.php";
 //Extract the variables and there type
 //todo: Generate an sql query to create a database for each model
 //todo: Execute the query
-foreach($models as $model){
+foreach ($models as $model) {
 
-    getModelStructure($model);
-
+  getModelStructure($model);
 }
 
-function getModelStructure($modelUri){
-    $filename = $modelUri;
-$handle = fopen($filename, "r");
-if ($handle) {
-  $content = fread($handle, filesize($filename));
-  extractVariables($content);
-  fclose($handle);
-} else {
-  echo "Unable to open file!";
-}
+function getModelStructure($modelUri)
+{
+  $filename = "../model/".$modelUri;
+  $handle = fopen($filename, "r");
+  if ($handle) {
+    $content = fread($handle, filesize($filename));
+    extractVariables($content);
+    fclose($handle);
+  } else {
+    echo "Unable to open file!";
+  }
 }
