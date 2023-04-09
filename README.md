@@ -20,10 +20,9 @@ To get started with PHExpress, follow these steps:
 
 <?php
  
- Sample code will be here
+// Sample code will be here
 
-```
-
+?>
 
 
 ## Documentation
@@ -37,4 +36,3 @@ If you would like to contribute to PHExpress, please fork the repository and sub
 ## License
 
 PHExpress is licensed under the [MIT License](licence will be here).
-```
