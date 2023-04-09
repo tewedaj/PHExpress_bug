@@ -7,18 +7,22 @@ function object_to_json($obj)
 
 //get data point and data type from the model
 //and creates a json for it
-function extractVariables($string)
-{
-    $regex = '/private\s+([^\s]+)\s+(\$[^\s;]+);/';
-    preg_match_all($regex, $string, $matches, PREG_SET_ORDER);
+function extractVariables($classDefinition) {
+    $variables = [];
 
-    $variables = array();
+    preg_match_all('/private\s+(\w+)\s+\$(\w+)\s*;\s*\/\/size:\s*(\d+)?/', $classDefinition, $matches, PREG_SET_ORDER);
+
     foreach ($matches as $match) {
-        $type = $match[1];
-        $name = $match[2];
-        $variables[$name] = $type;
+    //    echo json_encode($match);
+        $variable = [
+            'type' => $match[1],
+            'name' => $match[2],
+            'size' => isset($match[3]) ? intval($match[3]) : null,
+        ];
+
+        $variables[] = $variable;
     }
 
-    $json = json_encode($variables, JSON_PRETTY_PRINT);
-    echo ltrim($json, '$');
+    echo json_encode($variables);
 }
+
