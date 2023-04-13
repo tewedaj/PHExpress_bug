@@ -1,6 +1,7 @@
 <?php
 include "../model/models.php";
 include "../util/jsonHelper.php";
+include "../util/sqlGenerator.php";
 
 //Loop through the models file
 //Extract the variables and there type
@@ -8,7 +9,9 @@ include "../util/jsonHelper.php";
 //todo: Execute the query
 foreach ($models as $model) {
 
-  getModelStructure($model);
+ $modelDetail =  getModelStructure($model);
+
+  createTable("sf",$modelDetail);
 }
 
 function getModelStructure($modelUri)
@@ -17,7 +20,7 @@ function getModelStructure($modelUri)
   $handle = fopen($filename, "r");
   if ($handle) {
     $content = fread($handle, filesize($filename));
-    extractVariables($content);
+  return  extractVariables($content);
     fclose($handle);
   } else {
     echo "Unable to open file!";

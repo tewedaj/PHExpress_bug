@@ -23,6 +23,6 @@ function extractVariables($classDefinition) {
         $variables[] = $variable;
     }
 
-    echo json_encode($variables);
+    return json_encode($variables);
 }
 
