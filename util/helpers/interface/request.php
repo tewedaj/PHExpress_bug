@@ -2,9 +2,9 @@
 
 
 class Request{
-    private $method = $_SERVER['REQUEST_METHOD'];
-    private $url =$_SERVER["REQUEST_URI"];
-    private $headers = getallheaders();
-    private $body =  file_get_contents('php://input');
+    public $method = $_SERVER['REQUEST_METHOD'];
+    public $url =$_SERVER["REQUEST_URI"];
+    public $headers = getallheaders();
+    public $body =  file_get_contents('php://input');
 
 }

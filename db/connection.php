@@ -5,7 +5,7 @@
 	 public $valid;
 	 var $target_file;
 	public function __construct(){
-			$this->connect=mysqli_connect('localhost','root','','live');
+			$this->connect=mysqli_connect('localhost','root','','css_plus');
 	}
 	
 	public function q($sql){

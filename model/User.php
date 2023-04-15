@@ -1,12 +1,11 @@
 <?php
 
-class testModel{
+class User{
 
     private int $id;
     //size: 11
-    private string $name;
+    private string $user_name;
     //size: 254
-    private int $age;
+    private string $pass_word;
     //size: 254
-    
 }

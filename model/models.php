@@ -1,5 +1,5 @@
 <?php 
 $models = [
-    "testModel.php",
-    "test2Model.php"
+    "Tracker.php",
+    "User.php"
 ];

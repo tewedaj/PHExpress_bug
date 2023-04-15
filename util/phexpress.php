@@ -6,8 +6,6 @@ The code is designed to resemble the syntax of Node.js as closely as possible.
 
 class phexpress
 {
-
-    private String $header = "";
     private $requests = [];
 
     function __construct()

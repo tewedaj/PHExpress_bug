@@ -10,7 +10,7 @@
 class Response
 {
 
-    public  function respons($statusCode, $data)
+    public  function send($statusCode, $data)
     {
         http_response_code($statusCode);
         header('Content-Type: application/json');

@@ -6,8 +6,15 @@ error_reporting(E_ALL);
 include "./util/phexpress.php";
 include "./util/helpers/interface/response.php";
 include "./util/helpers/extra/jsonHelper.php";
+include "./util/helpers/sql/sqlGenerator.php";
+include "./db/connection.php";
 
+//this will create all the tables if they don't exist
+// include "./configuration/schemaMigration.php";
 
+$app = new phexpress();
 
 //Route imports
 include "./routes/student.php";
+include "./routes/tracker.php";
+
