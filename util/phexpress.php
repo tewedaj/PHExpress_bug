@@ -1,230 +1,98 @@
 <?php
+/*
+This PHP file handles all the routing interfaces, with support for HTTP methods POST, GET, PATCH, and DELETE.
+The code is designed to resemble the syntax of Node.js as closely as possible.
+*/
 
+class phexpress
+{
 
- class phexpress{
+    private String $header = "";
+    private $requests = [];
 
-    private int $routeStarter = 0;
-    private String $uri = "";
-    private String $body = "";
-    private String $header ="";
-    private String $headerAuth = "";
-    private bool $isPost = false;
-    private String $initalRoute = "";
-    // private  $requestData = new Request();
-
-
-    // $router->setRouteStarter(3);
-    // $router->setUrl($uri);
-    // $router->setIsPost($_SERVER['REQUEST_METHOD'] == 'POST'? true : false);
-    // $body = file_get_contents('php://input');
-    // $router->setHeader(json_encode(get_headers("http://".$_SERVER["SERVER_NAME"]."/".$uri)));
-    // $router->setBody(json_encode($body));
-    // $router->setInitalRoute("food");
-
-    public function filterUri(){
-         $method = $_SERVER['REQUEST_METHOD'];
-         $url =$_SERVER["REQUEST_URI"];
-         $headers = getallheaders();
-         $body =  file_get_contents('php://input');
-        if($url[strlen($url)-1] == "/"){
-            $url= substr($url,0,strlen($url)-1);
-        }
-    }
-
-    public function setIsPost($ispost){
-        // $requestData = new Request();
-         $method = $_SERVER['REQUEST_METHOD'];
-         $url =$_SERVER["REQUEST_URI"];
-         $headers = getallheaders();
-         $body =  file_get_contents('php://input');
-        $this->isPost = $method == "POST"? true : false;
-    }
-
-    public function filterRoute($route): String{
-         $response = $route;
-        if($route[0] == "/"){
-            $response = substr($route,1,strlen($route)-1);
-        }
-        return $response;
-        
-    }
-
-    public function Get(String $routes,$callBack){ 
-        // $requestData = new Request();
-         $method = $_SERVER['REQUEST_METHOD'];
-         $url =$_SERVER["REQUEST_URI"];
-         $headers = getallheaders();
-         $body =  file_get_contents('php://input');
-         
-        if(!($method == "POST")){
-        //filter route if it starts with '/'
-        $routes = $this->filterRoute($routes);
-        //split the endpoint by '/'
-        $route = explode( '/', $routes);
-        //remove the the last '/' if the uri ends with '/'
-        $this->filterUri();
-        
-        $uri = explode('.php/',$url);
-        //since the size starts from 1 we want it to start from zero
-        //so minimize one
-        $initialRoute ="saf";
-            $route = json_encode($route);   
-        $endpointUrls = [
-            "{$initialRoute}/{$route}",
-            "{$initialRoute}/{$route}/",
-            "{$initialRoute}/{$uri[1]}/{$route}",
+    function __construct()
+    {
+        $this->requests =  [
+            "method" => $_SERVER['REQUEST_METHOD'],
+            "url" => $_SERVER["REQUEST_URI"],
+            "headers" =>  getallheaders(),
+            "body" =>   file_get_contents('php://input'),
+            "params" => []
         ];
-
-      
-        if($uri[1] == $initialRoute."/".$routes || $uri[1]."/" == $initialRoute."/".$routes || $uri[1] == $initialRoute."/".$routes."/" ){
-
-            $callBack($this->uri,"none");
-
-            return true;
-        }else{
-            return false;
-
-        }
-     
-
-
-        //this will be the parent route
-    //     if($this->getInitalRoute() == $uri[$this->routeStarter]){
-            
-    //     for($x = $this->routeStarter; $x < sizeof($uri)-1;$x++){
-    //         $size++;
-            
-    //         if(strtolower($uri[$x+1]) == strtolower($route[$x-$this->routeStarter])){
-          
-    //             $parameters++;
-               
-    //         }
-    //     }
-    // }
-
-
-        //check if all the paramters of the requested End point exist
-        //check if the size matchs the given route
-        // if($parameters == $cout && $size == sizeOf($route)-1){
-        // $callBack($this->uri,"none");
-
-        //     return true;
-        // }else{
-          
-        //     return false;
-        // }
-    }
     }
 
-
-    public function Post(String $routes,$callBack){ 
-       
-
-        if($this->isPost){
-        //filter route if it starts with '/'
-        $routes = $this->filterRoute($routes);
-        //split the endpoint by '/'
-        $route = explode( '/', $routes);
-        //remove the the last '/' if the uri ends with '/'
-        $this->filterUri();
-        $uri = explode('.php/',$this->uri);
-       
-
-        //since the size starts from 1 we want it to start from zero
-        //so minimize one
-        $cout = sizeof($route)-1;
-        $parameters = 0;
-        $size = 0;
-        // echo "\n ***** \n";
-        // echo "\n URI: ". $uri[1];
-        // echo "\n Rout: ".$this->getInitalRoute()."/". $routes;
-
-        if($uri[1] == $this->getInitalRoute()."/".$routes || $uri[1]."/" == $this->getInitalRoute()."/".$routes || $uri[1] == $this->getInitalRoute()."/".$routes."/" ){
-            $callBack($this->body,"none");
-
-            return true;
-        }else{
-            return false;
-        }
-
-
-        //this will be the parent route
-    //     if($this->getInitalRoute() == $uri[$this->routeStarter]){
-            
-    //     for($x = $this->routeStarter; $x < sizeof($uri)-1;$x++){
-    //         $size++;
-            
-    //         if(strtolower($uri[$x+1]) == strtolower($route[$x-$this->routeStarter])){
-          
-    //             $parameters++;
-               
-    //         }
-    //     }
-    // }
-
-
-        //check if all the paramters of the requested End point exist
-        //check if the size matchs the given route
-        // if($parameters == $cout && $size == sizeOf($route)-1){
-        // $callBack($this->body,"none");
-        //     // exit();
-        //     return true;
-        // }else{
-          
-        //     return false;
-        // }
-    }
-    }
-
-    public function setHeaderAuth($auth){
-        $this->headerAuth = $auth;
-    }
-
-    public function setHeader($header){
-        $this->header = $header;
-    }
-
-    public function setBody($body){
-        $this->body = $body;
-    }
-
-    public function getHeader(){
-        return $this->header;
-    }
-
-    public function setUrl(String $url){
-        $this->uri = $url;
-    }
-
-    public function setRouteStarter(int $routeStarter){     
-        $this->routeStarter = 3;
-    }
-
-    public function getRouterStart(): int{
-        return $this->routeStarter;
-    }
-
-    /**
-     * Get the value of initalRoute
-     */ 
-    public function getInitalRoute()
+    public function Get(String $routes, $callBack)
     {
-        return $this->initalRoute;
+        $url = $this->requests["url"];
+
+        if (!($this->requests["method"] == "POST")) {
+
+            $path = parse_url($url, PHP_URL_PATH);
+            $path3 = explode(rtrim($routes, "/"), $path);
+            if (count($path3) > 1) {
+                if ($path3[1] == "" || $path3[1] == "/") {
+                    $response = new Response();
+                    $callBack($this->requests, $response);
+                    exit;
+                }
+            } else {
+
+                //generate a specific request based on the route given
+                $pattern =   getPathRegex($routes);
+                $pattern = str_replace('\(', '(', $pattern);
+
+                //             /^\/by\/(\d+)\/test\/(\d+)$/";
+                //             /^\/by\/(\d+)\/test\/(\d+)$/
+                //             /^\/by\/\(\d+)\/test\/\(\d+)$/
+                //             /^/by/([^\/]+)/test/([^\/]+)\/?$/
+                //              /^\/by/(\d+)/test/(\d+)\/?$/i
+                //              /^\/by/(\d+)/test/(\d+)\/?$/i
+                $variables = explode(":", $routes);
+
+                if (count($variables) > 1) {
+                    $matches = array();
+                    $finalUri = str_replace("PHExpress/", "", $path3[0]);
+                    $finalUri = rtrim($finalUri, "/");
+
+
+                    if (preg_match($pattern, $finalUri, $matches)) {
+                        $keyMatch = array();
+
+                        preg_match($pattern, str_replace(":", "", $routes), $keyMatch);
+
+                        $id = $matches[1];
+                        $yu = $matches[2];
+                        echo '{
+                         "' . $keyMatch[1] . '":' . $id . ',
+                         "' . $keyMatch[2] . '":"' . $yu . '"
+                         }';
+                    }
+                }
+            }
+        }
     }
 
-    /**
-     * Set the value of initalRoute
-     *
-     * @return  self
-     */ 
-    public function setInitalRoute($initalRoute)
-    {
-        $this->initalRoute = $initalRoute;
 
-        return $this;
+    public function Post(String $routes, $callBack)
+    {
+
+        // Check if HTTP Request type
+        // pass if it is POST
+        if ($this->requests["method"] == "POST") {
+            
+            $url = $_SERVER["REQUEST_URI"];
+            $path = parse_url($url, PHP_URL_PATH);
+            $path3 = explode($routes, $path);
+
+            if (count($path3) > 1) {
+                if ($path3[1] == "") {
+                    $response = new Response();
+                    $callBack($this->requests, $response);
+                    exit;
+                }
+            } else {
+                return false;
+            }
+        }
     }
 }
-
-
-
-?>

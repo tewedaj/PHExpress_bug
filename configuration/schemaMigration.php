@@ -1,7 +1,7 @@
 <?php
 include "../model/models.php";
-include "../util/jsonHelper.php";
-include "../util/sqlGenerator.php";
+include "../util/extra/jsonHelper.php";
+include "../util/sql/sqlGenerator.php";
 
 //Loop through the models file
 //Extract the variables and there type
