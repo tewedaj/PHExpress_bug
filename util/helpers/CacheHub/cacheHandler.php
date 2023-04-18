@@ -16,11 +16,17 @@ function createCache($cacheName, $cacheObject)
 //condition[2]: if the file is empty
 function isCacheValid($cacheName)
 {
-    $cacheBody = file_get_contents("./cache/" . $cacheName . ".JSON");
+    try {
 
-    if (strlen($cacheBody) > 0) {
-        return [true, $cacheBody];
-    } else {
+        $cacheBody = file_get_contents("./cache/" . $cacheName . ".JSON");
+
+        if (strlen($cacheBody) > 0) {
+            return [true, $cacheBody];
+        } else {
+            return [false, ""];
+        }
+    } catch (Exception $e) {
+        echo  $e->getMessage();
         return [false, ""];
     }
 }

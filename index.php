@@ -14,11 +14,12 @@ include "./db/connection.php";
 
 
 //this will create all the tables if they don't exist
-include "./configuration/schemaMigration.php";
+// include "./configuration/schemaMigration.php";
 
 $app = new phexpress();
 
 //Route imports
 include "./routes/student.php";
 include "./routes/tracker.php";
+include "./routes/User.php";
 
