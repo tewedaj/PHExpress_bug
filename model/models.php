@@ -1,5 +1,4 @@
 <?php 
 $models = [
-    "Tracker.php",
-    "User.php"
+    "TestModel3.php"
 ];

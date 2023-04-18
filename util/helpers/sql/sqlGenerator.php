@@ -7,27 +7,165 @@ function createTable($table_name, $columns)
     $columnsf = json_decode($columns, true);
     $query = "CREATE TABLE " . $table_name . " (";
     $i = 0;
-
+    $typeList = ["int" , "DateTime" , "String" , "string","Boolean", "Float"];
+    $foreginKeys = "";
     foreach ($columnsf as $i => $column) {
+        
+        if(in_array($column["type"],$typeList)){
+        
         $query .= $column["name"] . " " . str_replace("String", "varchar", str_replace("string", "varchar", $column["type"])) . "(" . $column["size"] . ")";
-        if ($i < count($columnsf) - 1) {
-            $query .= ", ";
-        }
-    }
+       
+    }else{
+        $query .= $column["name"] . " int(" . $column["size"] . ")";
+        
+       
+            $foreginKeys .= ", FOREIGN KEY (". $column["name"]  .") REFERENCES ". $column["type"] ."(id)";
 
-    $query .= ");";
+      
+    }
+    if ($i < count($columnsf) - 1) {
+        $query .= ", ";
+    }
+}
+
+    $query .= ",  PRIMARY KEY (id) ". $foreginKeys . " );";
     return $query;
 }
 
 function getTable($tableName)
 {
+
+    $cacheObj = isCacheValid($tableName);
+    $data = json_decode($cacheObj[1],true);
+
+    $date1 = new DateTime($data["timeStamp"]);
+    $date2 = new DateTime($data["invalidateTime"]);
+    $interval = $date1->diff($date2);
+    if($cacheObj[0]){
+    if ($interval->days > 0) {
+        echo json_encode($data["data"]);
+    }else{
+        $query = "SELECT * FROM " . $tableName;
+        $db = new connect();
+        $db->q($query);
+        $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
+        $cache = new Cache();
+        $current_date = date('Y-m-d H:i:s');
+        $invalidateDate = date('Y-m-d H:i:s', strtotime('+2 days'));
+        $cache->setTimeStamp($current_date);
+        $cache->setInvalidateTime($invalidateDate);
+        $cache->setData(json_encode($allResponse));
+        createCache($tableName, $cache);
+        echo json_encode($allResponse);
+    }
+
+
+} else {
     $query = "SELECT * FROM " . $tableName;
-
     $db = new connect();
-
     $db->q($query);
+    $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
+    $cache = new Cache();
+    $current_date = date('Y-m-d H:i:s');
+    $invalidateDate = date('Y-m-d H:i:s', strtotime('+2 days'));
+    $cache->setTimeStamp($current_date);
+    $cache->setInvalidateTime($invalidateDate);
+    $cache->setData(json_encode($allResponse));
+    createCache($tableName, $cache);
+    echo json_encode($allResponse);
+}
+}
 
-    echo json_encode($db->querys->fetch_all( MYSQLI_ASSOC ));
+function getTableWhen($condition,$tableName){
+
+    $trimedCondition = str_replace("=","_",str_replace(' ', '', $condition));
+
+    $cacheObj = isCacheValid($tableName."_".$trimedCondition);
+
+    $data = json_decode($cacheObj[1],true);
+
+    $date1 = new DateTime($data["timeStamp"]);
+    $date2 = new DateTime($data["invalidateTime"]);
+    $interval = $date1->diff($date2);
+    if($cacheObj[0]){
+    if ($interval->days > 0) {
+        echo json_encode($data["data"]);
+    }else{
+        $query = "SELECT * FROM " . $tableName ." ". $condition;
+        $db = new connect();
+        $db->q($query);
+        $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
+        $cache = new Cache();
+        $current_date = date('Y-m-d H:i:s');
+        $invalidateDate = date('Y-m-d H:i:s', strtotime('+2 days'));
+        $cache->setTimeStamp($current_date);
+        $cache->setInvalidateTime($invalidateDate);
+        $cache->setData(json_encode($allResponse));
+        createCache($tableName."_".$trimedCondition, $cache);
+        echo json_encode($allResponse);
+    }
+
+
+} else {
+    $query = "SELECT * FROM " . $tableName." ". $condition;
+    $db = new connect();
+    $db->q($query);
+    $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
+    $cache = new Cache();
+    $current_date = date('Y-m-d H:i:s');
+    $invalidateDate = date('Y-m-d H:i:s', strtotime('+2 days'));
+    $cache->setTimeStamp($current_date);
+    $cache->setInvalidateTime($invalidateDate);
+    $cache->setData(json_encode($allResponse));
+    createCache($tableName."_".$trimedCondition, $cache);
+    echo json_encode($allResponse);
+}
+}
+
+// ["tableName,id,tableName"]
+function getJoinedTable($tableName,$condition,$joins){
+    $trimedCondition = str_replace("=","_",str_replace(' ', '', $condition));
+
+    $cacheObj = isCacheValid($tableName."_".$trimedCondition);
+
+    $data = json_decode($cacheObj[1],true);
+
+    $date1 = new DateTime($data["timeStamp"]);
+    $date2 = new DateTime($data["invalidateTime"]);
+    $interval = $date1->diff($date2);
+    if($cacheObj[0]){
+    if ($interval->days > 0) {
+        echo json_encode($data["data"]);
+    }else{
+        $query = "SELECT * FROM " . $tableName ." ". $condition;
+        $db = new connect();
+        $db->q($query);
+        $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
+        $cache = new Cache();
+        $current_date = date('Y-m-d H:i:s');
+        $invalidateDate = date('Y-m-d H:i:s', strtotime('+2 days'));
+        $cache->setTimeStamp($current_date);
+        $cache->setInvalidateTime($invalidateDate);
+        $cache->setData(json_encode($allResponse));
+        createCache($tableName."_".$trimedCondition, $cache);
+        echo json_encode($allResponse);
+    }
+
+
+} else {
+    $query = "SELECT * FROM " . $tableName." ". $condition;
+    $db = new connect();
+    $db->q($query);
+    $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
+    $cache = new Cache();
+    $current_date = date('Y-m-d H:i:s');
+    $invalidateDate = date('Y-m-d H:i:s', strtotime('+2 days'));
+    $cache->setTimeStamp($current_date);
+    $cache->setInvalidateTime($invalidateDate);
+    $cache->setData(json_encode($allResponse));
+    createCache($tableName."_".$trimedCondition, $cache);
+    echo json_encode($allResponse);
+}
 }
 
 
@@ -65,9 +203,24 @@ function updateWhen($condition, $tableName, $body)
 {
     $body = json_decode($body);
     $queryBuilder = "UPDATE " . $tableName . " SET ";
+    $index = 1;
+    $size = count((array)$body);
     foreach ($body as $key => $value) {
-        $queryBuilder .= "$key = $value";
+        if($index == $size){
+            $queryBuilder .= " $key =  '$value' ";
+
+        }else{
+            $queryBuilder .= " $key =  '$value' ,";
+
+        }
+        $index++;
     }
-    $queryBuilder .= " WHERE $condition";
-    $queryBuilder .= ");";
+    $queryBuilder .= " WHERE  $condition";
+  
+    
+    
+    $db = new connect();
+
+    $db->q($queryBuilder);
+    
 }

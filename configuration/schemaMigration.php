@@ -1,7 +1,7 @@
 <?php
-include "./model/models.php";
-include "./util/helpers/sql/sqlGenerator.php";
-include "./db/connection.php";
+// include "./model/models.php";
+// include "./util/helpers/sql/sqlGenerator.php";
+// include "./db/connection.php";
 
 //Loop through the models file
 //Extract the variables and there type
@@ -14,7 +14,6 @@ foreach ($models as $model) {
   $modelDetail =  getModelStructure($model);
 
   $sqlQueries .= createTable(str_replace(".php","",$model), $modelDetail) ;
-
 
 }
   $db = new connect();
