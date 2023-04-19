@@ -32,13 +32,21 @@ function createTable($table_name, $columns)
 function getTable($tableName)
 {
 
-    $cacheObj = isCacheValid($tableName);
-    $data = json_decode($cacheObj[1], true);
+    if(file_exists($tableName)){
+        $cacheObj = isCacheValid($tableName);
 
-    $date1 = new DateTime($data["timeStamp"]);
-    $date2 = new DateTime($data["invalidateTime"]);
-    $interval = $date1->diff($date2);
+    }else{
+        $cacheObj = [false,""];
+    }
+
+    
+ 
+   
     if ($cacheObj[0]) {
+        $data = json_decode($cacheObj[1], true);
+        $date1 = new DateTime($data["timeStamp"]);
+        $date2 = new DateTime($data["invalidateTime"]);
+        $interval = $date1->diff($date2);
         if ($interval->days > 0) {
             echo json_encode($data["data"]);
         } else {

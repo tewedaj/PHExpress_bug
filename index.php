@@ -22,4 +22,3 @@ $app = new phexpress();
 include "./routes/student.php";
 include "./routes/tracker.php";
 include "./routes/User.php";
-
