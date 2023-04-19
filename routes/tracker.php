@@ -4,7 +4,7 @@ $parent = "/tracker/";
 
 $app->get($parent . "add", function ($req, $res) {
     insertInto("Tracker", '{"id": 4, "command": "yes aslkfjadslkjflk" , "timeStamp": "2023/12/26" }');
-    $res->send(200, "yes");
+    $res->send(200, '{"success": true}');
 });
 
 $app->get($parent . "get", function ($req, $res) {

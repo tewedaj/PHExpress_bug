@@ -42,7 +42,7 @@ function invalidateCache($tableName)
         foreach ($files as $file) {
             if (strpos($file, $tableName) !== false) {
                 // $contents = file_get_contents("$dir/$file");
-                file_put_contents("./cache/" . $file . ".JSON", "");
+                file_put_contents("./cache/" . $file , "");
 
 
             }
