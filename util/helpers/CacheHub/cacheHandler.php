@@ -30,3 +30,24 @@ function isCacheValid($cacheName)
         return [false, ""];
     }
 }
+
+
+function invalidateCache($tableName)
+{
+    try {
+
+        $dir = './cache/'; 
+      
+        $files = scandir($dir); 
+        foreach ($files as $file) {
+            if (strpos($file, $tableName) !== false) {
+                // $contents = file_get_contents("$dir/$file");
+                file_put_contents("./cache/" . $file . ".JSON", "");
+
+
+            }
+        }
+    } catch (Exception $e){
+        echo $e->getMessage();
+    }
+}

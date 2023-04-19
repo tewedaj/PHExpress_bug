@@ -217,6 +217,7 @@ function insertInto($tableName, $body)
     $db = new connect();
 
     $db->q($queryBuilder);
+    invalidateCache($tableName);
 }
 
 function updateWhen($condition, $tableName, $body)
