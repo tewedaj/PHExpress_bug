@@ -30,6 +30,12 @@ $app->get("/update", function ($req, $res) {
     $res->send(200, $req["body"]);
 });
 
+$app->get("/:one", function($req,$res){
+
+    
+    $res->send(200,$req["params"]["one"]);
+});
+
 $app->get("/updater", function($req,$res) {
     
 

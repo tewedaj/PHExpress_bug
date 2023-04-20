@@ -40,13 +40,6 @@ class phexpress
                 //generate a specific request based on the route given
                 $pattern =   getPathRegex($routes);
                 $pattern = str_replace('\(', '(', $pattern);
-
-                //             /^\/by\/(\d+)\/test\/(\d+)$/";
-                //             /^\/by\/(\d+)\/test\/(\d+)$/
-                //             /^\/by\/\(\d+)\/test\/\(\d+)$/
-                //             /^/by/([^\/]+)/test/([^\/]+)\/?$/
-                //              /^\/by/(\d+)/test/(\d+)\/?$/i
-                //              /^\/by/(\d+)/test/(\d+)\/?$/i
                 $variables = explode(":", $routes);
 
                 if (count($variables) > 1) {
@@ -60,12 +53,15 @@ class phexpress
 
                         preg_match($pattern, str_replace(":", "", $routes), $keyMatch);
 
-                        $id = $matches[1];
-                        $yu = $matches[2];
-                        echo '{
-                         "' . $keyMatch[1] . '":' . $id . ',
-                         "' . $keyMatch[2] . '":"' . $yu . '"
-                         }';
+
+                        for($x = 0 ; $x < count($matches); $x++){
+                            $this->requests["params"][$keyMatch[$x]] = $matches[$x];
+                            
+                        }
+
+                        $response = new Response();
+                        $callBack($this->requests, $response);
+                        exit;
                     }
                 }
             }
