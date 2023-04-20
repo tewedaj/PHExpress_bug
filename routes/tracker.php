@@ -8,7 +8,17 @@ $app->get($parent . "add", function ($req, $res) {
 });
 
 $app->get($parent . "get", function ($req, $res) {
-    $res->send(200, getTable("Tracker"));
+
+    global $db;
+    
+    $db->q("SELECT TABLE_NAME
+    FROM INFORMATION_SCHEMA.TABLES
+    ");
+    
+
+    $response = $db->querys->fetch_all(MYSQLI_ASSOC);
+
+    $res->send(200, json_encode($response));
 });
 
 

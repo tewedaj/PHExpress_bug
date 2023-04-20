@@ -51,7 +51,8 @@ function getTable($tableName)
             echo json_encode($data["data"]);
         } else {
             $query = "SELECT * FROM " . $tableName;
-            $db = new connect();
+global $db;
+            
             $db->q($query);
             $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
             $cache = new Cache();
@@ -65,7 +66,7 @@ function getTable($tableName)
         }
     } else {
         $query = "SELECT * FROM " . $tableName;
-        $db = new connect();
+        
         $db->q($query);
         $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
         $cache = new Cache();
@@ -105,7 +106,8 @@ function getTableWhen($condition, $tableName)
             echo json_encode($data["data"]);
         } else {
             $query = "SELECT * FROM " . $tableName . "  WHERE " . $condition;
-            $db = new connect();
+            global $db;
+            
             $db->q($query);
             $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
             $cache = new Cache();
@@ -119,7 +121,7 @@ function getTableWhen($condition, $tableName)
         }
     } else {
         $query = "SELECT * FROM " . $tableName . "  WHERE " . $condition;
-        $db = new connect();
+        
         $db->q($query);
         $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
         $cache = new Cache();
@@ -166,7 +168,8 @@ function getJoinedTable($tableName, $condition, $joins)
             if ($condition !== "") {
                 $query .=   "WHERE " . $condition;
             }
-            $db = new connect();
+            global $db;
+            
             $db->q($query);
             $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
             $cache = new Cache();
@@ -191,7 +194,7 @@ function getJoinedTable($tableName, $condition, $joins)
             $query .=   "WHERE " . $condition;
         }
       
-        $db = new connect();
+        
         $db->q($query);
         $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
         $cache = new Cache();
@@ -231,7 +234,8 @@ function insertInto($tableName, $body)
     }
 
     $queryBuilder = $queryBuilder . ");";
-    $db = new connect();
+    
+    global $db;
 
     $db->q($queryBuilder);
     invalidateCache($tableName);
@@ -255,7 +259,8 @@ function updateWhen($condition, $tableName, $body)
 
 
 
-    $db = new connect();
+    
+global $db;
 
     $db->q($queryBuilder);
 }
