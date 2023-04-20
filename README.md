@@ -21,7 +21,13 @@ To get started with PHExpress, follow these steps:
 ```php
 <?php
  
-// Sample code will be here
+    $app = new phexpress();
+    $app->setParent("student");
+     
+    $app->get("/get", function($req,$res){
+        // this line will response with all the list of students with status code 200
+        $res->send(200,getTable("students")); 
+    });
 
 ?>
 ```
