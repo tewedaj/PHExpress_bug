@@ -1,24 +1,13 @@
 <?php
-// include "./model/models.php";
-// include "./util/helpers/sql/sqlGenerator.php";
-// include "./db/connection.php";
-
-//Loop through the models file
-//Extract the variables and there type
-//todo: Generate an sql query to create a database for each model
-//todo: Execute the query
 
 $sqlQueries = "";
 try {
- 
+  
+  global $db;
 
-  $dbName = $settings["databaseName"];
-$db->rawQuery("CREATE DATABASE IF NOT EXISTS ". $dbName);
-
-
-    $db->q("SELECT TABLE_NAME
-    FROM INFORMATION_SCHEMA.TABLES
-    ");
+    $dbName = $settings["databaseName"];
+    $db->q("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES
+    WHERE TABLE_SCHEMA = '". $dbName."'");
 
 
     $response = $db->querys->fetch_all(MYSQLI_ASSOC);
@@ -27,27 +16,31 @@ $db->rawQuery("CREATE DATABASE IF NOT EXISTS ". $dbName);
   $dir = './model/'; 
 
   $files = scandir($dir); 
-  
-  foreach ($files as $file) {
+  $listOfQuery = [];
+  $x = 0;
+
+
+  foreach ($models as $file) {
    $modelName = strtolower(explode(".",$file)[0]);
-  if($file != "." && $file != ".."  ){
    
-    if(!findTable($modelName,$response,$size)){
-      echo "iii: ". $modelName . " <br>";
+    if(findTable($modelName,$response,$size) == false){
   $modelDetail =  getModelStructure($file);
-  echo "iii: ". json_encode($modelDetail) . " <br>";
 
   $sqlQueries .= createTable(str_replace(".php","",$file), $modelDetail) ;
-
-}
-}
-
+  // $listOfQuery[$x] = createTable(str_replace(".php","",$file), $modelDetail);
 
 }
 
-  
 
-  $db->connect->multi_query($sqlQueries);
+
+}
+
+
+  if($sqlQueries != ""){
+    $db->connect->multi_query($sqlQueries);
+
+  }
+
 } catch (Exception $e){
   echo $e->getMessage();
 }

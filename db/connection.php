@@ -4,8 +4,9 @@
 	 public $querys;
 	 public $valid;
 	 var $target_file;
-	public function __construct(){
-			$this->connect=mysqli_connect('localhost','root','','css_plus');
+	public function __construct($setting){
+
+			$this->connect=mysqli_connect($setting["server"],$setting["userName"],$setting["serverPassword"],$setting["databaseName"]);
 	}
 	
 	public function q($sql){

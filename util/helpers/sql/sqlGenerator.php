@@ -51,7 +51,7 @@ function getTable($tableName)
             echo json_encode($data["data"]);
         } else {
             $query = "SELECT * FROM " . $tableName;
-global $db;
+        global $db;
             
             $db->q($query);
             $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
@@ -66,7 +66,7 @@ global $db;
         }
     } else {
         $query = "SELECT * FROM " . $tableName;
-        
+        global $db;
         $db->q($query);
         $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
         $cache = new Cache();

@@ -9,6 +9,7 @@ include "./util/phexpress.php";
 
 
 include "./util/helpers/interface/response.php";
+include "./model/models.php";
 include "./util/helpers/extra/jsonHelper.php";
 include "./util/helpers/CacheHub/Cache.php";
 include "./util/helpers/CacheHub/cacheHandler.php";
@@ -16,12 +17,14 @@ include "./util/helpers/algo/binarySearch.php";
 include "./util/helpers/sql/sqlGenerator.php";
 include "./util/setting.php";
 
+global $db;
+$db = new connect($settings);
 
 $settings["modelController"] ? include "./configuration/schemaMigration.php" : "";
+$settings["modelController"] ? include "./db/initialize.php" : "";
+
 //this will create all the tables if they don't exist
-$app = new phexpress();
-global $db;
-$db = new connect();
+
 
 //Route imports
 include "./routes/student.php";

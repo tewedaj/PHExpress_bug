@@ -7,6 +7,7 @@ The code is designed to resemble the syntax of Node.js as closely as possible.
 class phexpress
 {
     private $requests = [];
+    private $parent;
 
     function __construct()
     {
@@ -21,12 +22,13 @@ class phexpress
 
     public function Get(String $routes, $callBack)
     {
+        $routes = "/".$this->parent.$routes;
         $url = $this->requests["url"];
 
         if (!($this->requests["method"] == "POST")) {
 
             $path = parse_url($url, PHP_URL_PATH);
-            $path3 = explode(rtrim($routes, "/"), $path);
+            $path3 = explode(rtrim($routes,"/"), $path);
             if (count($path3) > 1) {
                 if ($path3[1] == "" || $path3[1] == "/") {
                     $response = new Response();
@@ -69,6 +71,12 @@ class phexpress
             }
         }
     }
+
+
+    public function setParent($parent){
+        $this->parent = $parent;
+    }
+
 
 
     public function Post(String $routes, $callBack)

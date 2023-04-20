@@ -31,9 +31,8 @@ function findTableBinary($searchTerm,$starting,$ending,$list): int{
 function findTable($searchTerm,$list,$size){
 
     
-    
-    for($x = 0; $x < $size; $x++){
-       if($list[$x]["TABLE_NAME"] == $searchTerm){
+    for($x = 0; $x <= $size; $x++){
+       if(strcmp($list[$x]["TABLE_NAME"],$searchTerm)  == 0){
         return true;
        }
     }
