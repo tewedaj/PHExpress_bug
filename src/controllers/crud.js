@@ -11,11 +11,15 @@ const { select, selectBy, selectById } = require('../utils/endpoints/selectEndpo
 		var path = vscode.window.activeTextEditor.document.uri._fsPath.toString();
 		var folderUri = vscode.workspace.workspaceFolders[0].uri;
 		var modelName = vscode.window.activeTextEditor.document.uri.toString().split("/")[vscode.window.activeTextEditor.document.uri.toString().split("/").length - 1].split(".php")[0];
-         
+        var indexContent = vscode.workspaceFolders;
+        console.log("AAA: " + indexContent);
         var codeBlock = `<?php
         
         //auto generated file \n 
         
+        $app = new phexpress();
+        $app->setParent("${modelName}");
+
         ${select(modelName)} \n \n 
         ${selectById(modelName)} \n \n
         
