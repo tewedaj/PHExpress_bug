@@ -5,6 +5,7 @@ const { readContent } = require("../utils/IO/readFile");
 const { writeFile } = require('../utils/IO/writeFile');
 const { concatnateToLine } = require('../utils/contentManager/concatNewLine');
 const {getTextModelDetail} = require('../utils/regex/modelRegex');
+const { post } = require('../utils/endpoints/postEndpoints');
 //todo: Take the model the command is run on
 //todo: Creacte a route file with the model name
 //todo: Create endpoint for each target in the route file
@@ -26,7 +27,8 @@ async function createCrud(vscode) {
 
         ${select(modelName)} \n \n 
         ${selectById(modelName)} \n \n
-        ${selectBy(modelName,modelDetail)}
+        ${selectBy(modelName,modelDetail)} \n \n
+        ${post(modelName,modelDetail)}
         `;
 
     writeFile("/", "index.php", vscode, newContent);

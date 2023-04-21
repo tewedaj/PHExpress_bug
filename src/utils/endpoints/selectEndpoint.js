@@ -4,7 +4,7 @@
 //Select * end point 
 function select(modelName){
     var response = `
-    $app->get("/${modelName}/", function ($req, $res) {
+    $app->get("/", function ($req, $res) {
         $res->send(200, getTable("${modelName}"));
     });
     `;
@@ -16,7 +16,7 @@ function select(modelName){
 //Select modelName by id
 function selectById(modelName){
     var response = `
-    $app->get("/${modelName}/:id", function ($req, $res) {
+    $app->get("/:id", function ($req, $res) {
         $res->send(200, getTableWhen(" id = ". $req->params["id"] ,"${modelName}"));
     });
     `;
@@ -29,7 +29,7 @@ function selectBy(modelName,model){
    model.forEach(variable => {
     response = response +  `
     
-    $app->get("/${modelName}/:${variable.name}", function ($req, $res) {
+    $app->get("/:${variable.name}", function ($req, $res) {
         $res->send(200, getTableWhen(" ${variable.name} = ". $req->params["${variable.name}"] ,"${modelName}"));
     });
 
