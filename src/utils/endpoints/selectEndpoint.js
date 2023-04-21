@@ -27,10 +27,10 @@ function selectById(modelName){
 function selectBy(modelName,model){
     var response = "";
    model.forEach(variable => {
-    response +=  `
+    response = response +  `
     
-    $app->get("/${modelName}/:${variable}", function ($req, $res) {
-        $res->send(200, getTableWhen(" ${variable} = ". $req->params["${variable}"] ,"${modelName}"));
+    $app->get("/${modelName}/:${variable.name}", function ($req, $res) {
+        $res->send(200, getTableWhen(" ${variable.name} = ". $req->params["${variable.name}"] ,"${modelName}"));
     });
 
     `;
