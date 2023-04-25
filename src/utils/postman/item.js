@@ -9,9 +9,9 @@ function generateItemGet(route){
             "method": "GET",
             "header": [],
             "url": {
-                "raw": "${{url}}" + route,
+                "raw": "{{url}}" + route,
                 "host": [
-                    "${{url}}"
+                    "{{url}}"
                 ],
                 "path": route.split("/")
                     
@@ -40,9 +40,9 @@ function generateItemPost(route,body){
                 }
             },
             "url": {
-                "raw": "${{url}}" + route,
+                "raw": "{{url}}" + route,
                 "host": [
-                    "${{url}}"
+                    "{{url}}"
                 ],
                 "path": route.split("/")
                     
@@ -69,9 +69,9 @@ function generateItemPatch(route,body){
                 }
             },
             "url": {
-                "raw": "${{url}}" + route,
+                "raw": "{{url}}" + route,
                 "host": [
-                    "${{url}}"
+                    "{{url}}"
                 ],
                 "path": route.split("/")
                     
@@ -91,9 +91,9 @@ function generateItemDelete(route){
             "method": "DELETE",
             "header": [],
             "url": {
-                "raw": "${{url}}" + route,
+                "raw": "{{url}}" + route,
                 "host": [
-                    "${{url}}"
+                    "{{url}}"
                 ],
                 "path": route.split("/")
                     
