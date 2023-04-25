@@ -28,6 +28,13 @@ $settings["modelController"] ? include "./db/initialize.php" : "";
 
 //Route imports
 
+ 
+ 
+ 
  include "./routes/Glucose.php"; 
-  
+ include "./routes/Student.php"; 
+ include "./routes/Teacher.php"; 
+ include "./routes/TestModel2.php"; 
+ include "./routes/TestModel3.php"; 
+ include "./routes/Tracker.php"; 
  include "./routes/User.php";

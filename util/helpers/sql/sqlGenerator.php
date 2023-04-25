@@ -17,8 +17,13 @@ function createTable($table_name, $columns)
     foreach ($columnsf as $i => $column) {
 
         if (in_array($column["type"], $typeList)) {
+            if($column["name"] == "id"){
+                $query .= $column["name"] . " " . str_replace("String", "varchar", str_replace("string", "varchar", $column["type"])) . "(" . $column["size"] . ")  NOT NULL AUTO_INCREMENT";
 
-            $query .= $column["name"] . " " . str_replace("String", "varchar", str_replace("string", "varchar", $column["type"])) . "(" . $column["size"] . ")";
+            }else{
+                
+                $query .= $column["name"] . " " . str_replace("String", "varchar", str_replace("string", "varchar", $column["type"])) . "(" . $column["size"] . ")";
+            }
         } else {
             $query .= $column["name"] . " int(" . $column["size"] . ")";
 
@@ -124,7 +129,7 @@ function getTableWhen($condition, $tableName)
         }
     } else {
         $query = "SELECT * FROM " . $tableName . "  WHERE " . $condition;
-
+        global $db;
         $db->q($query);
         $allResponse = $db->querys->fetch_all(MYSQLI_ASSOC);
         $cache = new Cache();
@@ -146,7 +151,7 @@ function deleteTable($condition, $tableName)
     global $db;
 
     $db->q($query);
-    if ($db->querys->num_rows > 0) {
+    if ($db->connect->affected_rows > 0) {
         invalidateCache($tableName);
 
         return  '{
@@ -321,7 +326,7 @@ function insertInto($tableName, $body)
 
     $db->q($queryBuilder);
 
-    if ($db->querys->num_rows > 0) {
+    if ($db->connect->affected_rows > 0) {
         invalidateCache($tableName);
 
         return '{
