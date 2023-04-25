@@ -40,10 +40,10 @@ async function getRoutes(fileContent, vscode) {
         routes.item[1].item.push(generateItemPost(parent[2] + postRequestList[2], obj));
     }
     while (patchRequestList = patchRequestRouteRegex.exec(fileContent)) {
-        routes.item[2].item.push(generateItemPatch(parent[2] + postRequestList[2], obj));
+        routes.item[2].item.push(generateItemPatch(parent[2] + patchRequestList[2], obj));
     }
     while (deleteRequestList = deleteRequestRouteRegex.exec(fileContent)) {
-        routes.item[3].item.push(generateItemDelete(parent[2] + getRequestList[2]));
+        routes.item[3].item.push(generateItemDelete(parent[2] + deleteRequestList[2]));
     }
 
     return routes;
