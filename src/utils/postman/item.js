@@ -9,10 +9,9 @@ function generateItemGet(route){
             "method": "GET",
             "header": [],
             "url": {
-                "raw": "http://localhost/" + route,
-                "protocol": "http",
+                "raw": "${{url}}" + route,
                 "host": [
-                    "localhost"
+                    "${{url}}"
                 ],
                 "path": route.split("/")
                     
@@ -41,10 +40,9 @@ function generateItemPost(route,body){
                 }
             },
             "url": {
-                "raw": "http://localhost/" + route,
-                "protocol": "http",
+                "raw": "${{url}}" + route,
                 "host": [
-                    "localhost"
+                    "${{url}}"
                 ],
                 "path": route.split("/")
                     
@@ -71,10 +69,9 @@ function generateItemPatch(route,body){
                 }
             },
             "url": {
-                "raw": "http://localhost/" + route,
-                "protocol": "http",
+                "raw": "${{url}}" + route,
                 "host": [
-                    "localhost"
+                    "${{url}}"
                 ],
                 "path": route.split("/")
                     
@@ -94,10 +91,9 @@ function generateItemDelete(route){
             "method": "DELETE",
             "header": [],
             "url": {
-                "raw": "http://localhost/" + route,
-                "protocol": "http",
+                "raw": "${{url}}" + route,
                 "host": [
-                    "localhost"
+                    "${{url}}"
                 ],
                 "path": route.split("/")
                     
