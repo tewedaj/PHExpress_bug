@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "",
+		"name": "PHExpressfff",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": ""
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "addUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\"user_name\":\"sda\",\r\n \t \t\"pass_word\":\"asd\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/phexpress/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"phexpress",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tracker get",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "tracker update",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"command\": \"lets gghnot gooo\",\r\n    \"timeStamp\": \"2023-12-28 00:00:00.000000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/PHExpress/tracker/update",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"PHExpress",
+						"tracker",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tracker add",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "addGlucose",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

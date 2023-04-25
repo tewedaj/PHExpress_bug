@@ -13,7 +13,7 @@ function post(modelName,modelDetail){
     return `
         //expected body
         /*
-        ${JSON.stringify(obj).split(",\"").join("\n \t \t")} \n
+        ${JSON.stringify(obj).split(",\"").join("\n \t \t \"")} \n
         */
         $app->post("/",function ($req, $res){
             $res->send(200,insertInto("${modelName}",$req["body"]));
