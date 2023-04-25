@@ -4,12 +4,14 @@
 function deleteBy(modelName, model) {
     var response = "";
     model.forEach(variable => {
+    var paramName = variable.name.split("_").join("");
+
         response = response + `
     
-    $app->delete("/:${variable.name}", function ($req, $res) {
-        $deleteResult = deleteTable(" ${variable.name} = ". $req["params"]["${variable.name}"] ,"${modelName}");
+    $app->delete("/getBy${paramName}/:${paramName}", function ($req, $res) {
+        $deleteResult = deleteTable(" ${variable.name} = ". $req["params"]["${paramName}"] ,"${modelName}");
         if($deleteResult["Success"]){
-            $res->send(200, getTableWhen(" ${variable.name} = ". $req["params"]["${variable.name}"] ,"${modelName}"));
+            $res->send(200, '{"success": true}');
         }else{
         $res->send(400, '{"err": $deleteResult["Message"]}');
         }

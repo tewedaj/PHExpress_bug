@@ -1,10 +1,12 @@
 function updateBy(modelName,model){
     var response = "";
    model.forEach(variable => {
+    var paramName = variable.name.split("_").join("");
+
     response = response +  `
     
-    $app->patch("/:${variable.name}", function ($req, $res) {
-        updateWhen(" ${variable.name} = ". $req["params"]["${variable.name}"] ,"${modelName}",$req["body"]);
+    $app->patch("/getBy${paramName}/:${variable.name.split("_").join("")}", function ($req, $res) {
+        updateWhen(" ${variable.name} = ". $req["params"]["${paramName}"] ,"${modelName}",$req["body"]);
     });
 
     `;
