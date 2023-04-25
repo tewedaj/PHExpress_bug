@@ -138,15 +138,38 @@ function getTableWhen($condition, $tableName)
     }
 }
 
-function getFiltredTableWhen($condition, $tableName,$columns)
+
+
+function deleteTable($condition, $tableName)
 {
-    
+    $query = "DELETE FROM " . $tableName . "  WHERE " . $condition;
+    global $db;
+
+    $db->q($query);
+    if ($db->querys->num_rows > 0) {
+        invalidateCache($tableName);
+
+        return  '{
+            "Success": true
+            "Message": "Successfully Added"
+        }';
+    } else {
+        return  '{
+            "Success": true
+            "Message": '. $db->connect->error .'
+        }';
+    }
+}
+
+function getFiltredTableWhen($condition, $tableName, $columns)
+{
+
     $trimedCondition = str_replace("=", "_", str_replace(' ', '', $condition));
-    $trimedColumns = str_replace(",","_",str_replace(' ', '',$columns));
-    
+    $trimedColumns = str_replace(",", "_", str_replace(' ', '', $columns));
+
 
     if (file_exists($tableName)) {
-        $cacheObj = isCacheValid($tableName . "_" . $trimedCondition."_".$trimedColumns);
+        $cacheObj = isCacheValid($tableName . "_" . $trimedCondition . "_" . $trimedColumns);
     } else {
         $cacheObj = [false, ""];
     }
@@ -173,11 +196,11 @@ function getFiltredTableWhen($condition, $tableName,$columns)
             $cache->setTimeStamp($current_date);
             $cache->setInvalidateTime($invalidateDate);
             $cache->setData(json_encode($allResponse));
-            createCache($tableName . "_" . $trimedCondition."_".$trimedColumns, $cache);
+            createCache($tableName . "_" . $trimedCondition . "_" . $trimedColumns, $cache);
             echo json_encode($allResponse);
         }
     } else {
-        
+
         $query = "SELECT $columns FROM " . $tableName . "  WHERE " . $condition;
 
         $db->q($query);
@@ -188,7 +211,7 @@ function getFiltredTableWhen($condition, $tableName,$columns)
         $cache->setTimeStamp($current_date);
         $cache->setInvalidateTime($invalidateDate);
         $cache->setData(json_encode($allResponse));
-        createCache($tableName . "_" . $trimedCondition."_".$trimedColumns, $cache);
+        createCache($tableName . "_" . $trimedCondition . "_" . $trimedColumns, $cache);
         echo json_encode($allResponse);
     }
 }
@@ -198,10 +221,10 @@ function getFiltredTableWhen($condition, $tableName,$columns)
 function getJoinedTable($tableName, $condition, $joins)
 {
     $trimedCondition = str_replace("\"", "", str_replace(",", "_", str_replace("]", "", str_replace("[", "_", str_replace("=", "_", str_replace(' ', '', $condition)) . "." . json_encode($joins)))));
-    $trimedJoins = str_replace(",","_", str_replace("[","_",str_replace("]","_",$joins)));
+    $trimedJoins = str_replace(",", "_", str_replace("[", "_", str_replace("]", "_", $joins)));
     // $trimedCondition = $tableName;
     if (file_exists($tableName)) {
-        $cacheObj = isCacheValid($tableName . "_" . $trimedCondition."_".$trimedJoins);
+        $cacheObj = isCacheValid($tableName . "_" . $trimedCondition . "_" . $trimedJoins);
     } else {
         $cacheObj = [false, ""];
     }
@@ -237,7 +260,7 @@ function getJoinedTable($tableName, $condition, $joins)
             $cache->setTimeStamp($current_date);
             $cache->setInvalidateTime($invalidateDate);
             $cache->setData(json_encode($allResponse));
-            createCache($tableName . "_" . $trimedCondition."_".$trimedJoins, $cache);
+            createCache($tableName . "_" . $trimedCondition . "_" . $trimedJoins, $cache);
             echo json_encode($allResponse);
         }
     } else {
@@ -262,7 +285,7 @@ function getJoinedTable($tableName, $condition, $joins)
         $cache->setTimeStamp($current_date);
         $cache->setInvalidateTime($invalidateDate);
         $cache->setData(json_encode($allResponse));
-        createCache($tableName . "_" . $trimedCondition."_".$trimedJoins, $cache);
+        createCache($tableName . "_" . $trimedCondition . "_" . $trimedJoins, $cache);
         echo json_encode($allResponse);
     }
 }
@@ -297,6 +320,21 @@ function insertInto($tableName, $body)
     global $db;
 
     $db->q($queryBuilder);
+
+    if ($db->querys->num_rows > 0) {
+        invalidateCache($tableName);
+
+        return '{
+            "Success": true
+            "Message": "Successfully Added"
+        }';
+
+    } else {
+        return '{
+         "Success": false,
+         "Message": '. $db->connect->error .'   
+        }';
+    }
     invalidateCache($tableName);
 }
 
