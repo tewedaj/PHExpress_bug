@@ -7,7 +7,7 @@
 // featching from the exact file for the exact request
 function createCache($cacheName, $cacheObject)
 {
-    file_put_contents("./cache/" . $cacheName . ".JSON", $cacheObject);
+    file_put_contents("./cache/" . $cacheName . ".cacheHub", $cacheObject);
 }
 
 
@@ -18,7 +18,7 @@ function isCacheValid($cacheName)
 {
     try {
 
-        $cacheBody = file_get_contents("./cache/" . $cacheName . ".JSON");
+        $cacheBody = file_get_contents("./cache/" . $cacheName . ".cacheHub");
 
         if (strlen($cacheBody) > 0) {
             return [true, $cacheBody];

@@ -1,9 +1,11 @@
 <?php
 /*
 This PHP script implements a routing mechanism that supports HTTP methods such as POST, GET, PATCH, and DELETE.
-The code is structured to closely resemble the syntax of Node.js, providing developers with a familiar programming paradigm. Through this script,
-web developers can easily define and manage routes in their web applications. By utilizing a syntax that is similar to Node.js, the script simplifies the process of building web applications in PHP,
-thereby improving the efficiency and productivity of web development. */
+The code is structured to closely resemble the syntax of Node.js, providing developers with a familiar 
+programming paradigm. Through this script, web developers can easily define and manage routes in their web
+applications. By utilizing a syntax that is similar to Node.js, the script simplifies the process of building
+web applications in PHP, thereby improving the efficiency and productivity of web development. 
+*/
 
 class phexpress
 {

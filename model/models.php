@@ -7,5 +7,6 @@ $models = [
     "Teacher.php",
     "TestModel2.php",
     "TestModel3.php",
-    "Tracker.php"
+    "Tracker.php",
+    "Glucose.php"
 ];
