@@ -4,7 +4,7 @@ function updateBy(modelName,model){
     response = response +  `
     
     $app->patch("/:${variable.name}", function ($req, $res) {
-        updateWhen(" ${variable.name} = ". $req->params["${variable.name}"] ,"${modelName}",$req["body"]);
+        updateWhen(" ${variable.name} = ". $req["params"]["${variable.name}"] ,"${modelName}",$req["body"]);
     });
 
     `;
