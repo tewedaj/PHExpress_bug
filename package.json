@@ -14,12 +14,12 @@
   "contributes": {
     "commands": [
       {
-        "command": "phexpress.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "phexpress.crud",
         "title": "PHExpress: CRUD"
+      },
+      {
+        "command": "phexpress.PostManGenerator",
+        "title": "PHExpress: PostManGenerator"
       }
     ]
   },

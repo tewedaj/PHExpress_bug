@@ -1,46 +1,118 @@
 
 //Generate a single Post man request
-function generateItem(route, requestName, jsonBody) {
+function generateItemGet(route){
 
 
     return {
-        "name": requestName,
-        "item": [
-            {
-                "name": "addUser",
-                "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                        "mode": "raw",
-                        "raw": jsonBody,
-                        "options": {
-                            "raw": {
-                                "language": "json"
-                            }
-                        }
-                    },
-                    "url": {
-                        "raw": "http://localhost/" + route,
-                        "protocol": "http",
-                        "host": [
-                            "localhost"
-                        ],
-                        "path": [
-                            route.split("/").map((res) => {
-                                return res + ",";
-                            })
-                        ]
-                    }
-                },
-                "response": []
+        "name": route.split("/").join(" ").split(":").join("By "),
+        "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+                "raw": "http://localhost/" + route,
+                "protocol": "http",
+                "host": [
+                    "localhost"
+                ],
+                "path": route.split("/")
+                    
             }
-        ]
+        },
+        "response": []
     };
+
+}
+
+
+
+function generateItemPost(route,body){
+    return {
+        "name": route.split("/").join(" ").split(":").join("By "),
+        "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+                "mode": "raw",
+                "raw": JSON.stringify(body),
+                "options": {
+                    "raw": {
+                        "language": "json"
+                    }
+                }
+            },
+            "url": {
+                "raw": "http://localhost/" + route,
+                "protocol": "http",
+                "host": [
+                    "localhost"
+                ],
+                "path": route.split("/")
+                    
+            }
+        },
+        "response": []
+    };
+}
+
+
+function generateItemPatch(route,body){
+    return {
+        "name": route.split("/").join(" ").split(":").join("By "),
+        "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+                "mode": "raw",
+                "raw": JSON.stringify(body),
+                "options": {
+                    "raw": {
+                        "language": "json"
+                    }
+                }
+            },
+            "url": {
+                "raw": "http://localhost/" + route,
+                "protocol": "http",
+                "host": [
+                    "localhost"
+                ],
+                "path": route.split("/")
+                    
+            }
+        },
+        "response": []
+    };
+}
+
+
+function generateItemDelete(route){
+
+
+    return {
+        "name": route.split("/").join(" ").split(":").join("By "),
+        "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+                "raw": "http://localhost/" + route,
+                "protocol": "http",
+                "host": [
+                    "localhost"
+                ],
+                "path": route.split("/")
+                    
+            }
+        },
+        "response": []
+    };
+
 }
 
 
 
 module.exports = {
-    generateItem: generateItem
+    generateItemGet: generateItemGet,
+    generateItemPost: generateItemPost,
+    generateItemPatch: generateItemPatch,
+    generateItemDelete: generateItemDelete
 }

@@ -1,8 +1,8 @@
 const { generateInfo } = require("./info");
-const { generateItem } = require("./item");
+const { generateItemGet } = require("./item");
 
 //generate the whole file
-function generatePostManFile(){
+function generatePostManFile(modelName){
 
     
 
