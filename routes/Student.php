@@ -1,5 +1,5 @@
 <?php
-        
+        include "./controller/StudentController.php";
         //auto generated file 
  
         
@@ -8,34 +8,39 @@
 
         
     $app->get("/", function ($req, $res) {
-        $res->send(200, getTable("Student"));
+        $StudentController = new StudentController($req, $res);   
+        $StudentController->getStudent();
     });
      
  
  
         
     $app->get("/:id", function ($req, $res) {
-        $res->send(200, getTableWhen(" id = ". $req["params"]["id"] ,"Student"));
+        $StudentController = new StudentController($req, $res);   
+        $StudentController->getStudent();
     });
      
  
 
         
     
-    $app->get("/:id", function ($req, $res) {
-        $res->send(200, getTableWhen(" id = ". $req["params"]["id"] ,"Student"));
+    $app->get("/getByid/:id", function ($req, $res) {
+        $StudentController = new StudentController($req, $res);   
+        $StudentController->getByid();
     });
 
     
     
-    $app->get("/:user_name", function ($req, $res) {
-        $res->send(200, getTableWhen(" user_name = ". $req["params"]["user_name"] ,"Student"));
+    $app->get("/getByusername/:username", function ($req, $res) {
+        $StudentController = new StudentController($req, $res);   
+        $StudentController->getByusername();
     });
 
     
     
-    $app->get("/:pass_word", function ($req, $res) {
-        $res->send(200, getTableWhen(" pass_word = ". $req["params"]["pass_word"] ,"Student"));
+    $app->get("/getBypassword/:password", function ($req, $res) {
+        $StudentController = new StudentController($req, $res);   
+        $StudentController->getBypassword();
     });
 
      
@@ -44,27 +49,31 @@
         
      
         $app->post("/",function ($req, $res){
-            $res->send(200,insertInto("Student",$req["body"]));
+            $StudentController = new StudentController($req, $res);   
+            $StudentController->setStudent();
         });
      
  
 
         
     
-    $app->patch("/:id", function ($req, $res) {
-        updateWhen(" id = ". $req["params"]["id"] ,"Student",$req["body"]);
+    $app->patch("/updateByid/:id", function ($req, $res) {
+        $StudentController = new StudentController($req, $res);   
+        $StudentController->updateByid();
     });
 
     
     
-    $app->patch("/:user_name", function ($req, $res) {
-        updateWhen(" user_name = ". $req["params"]["user_name"] ,"Student",$req["body"]);
+    $app->patch("/updateByusername/:username", function ($req, $res) {
+        $StudentController = new StudentController($req, $res);   
+        $StudentController->updateByusername();
     });
 
     
     
-    $app->patch("/:pass_word", function ($req, $res) {
-        updateWhen(" pass_word = ". $req["params"]["pass_word"] ,"Student",$req["body"]);
+    $app->patch("/updateBypassword/:password", function ($req, $res) {
+        $StudentController = new StudentController($req, $res);   
+        $StudentController->updateBypassword();
     });
 
      
@@ -72,13 +81,9 @@
 
         
     
-    $app->delete("/:id", function ($req, $res) {
-        $deleteResult = deleteTable(" id = ". $req["params"]["id"] ,"Student");
-        if($deleteResult["Success"]){
-            $res->send(200, getTableWhen(" id = ". $req["params"]["id"] ,"Student"));
-        }else{
-        $res->send(400, '{"err": $deleteResult["Message"]}');
-        }
+    $app->delete("/deleteByid/:id", function ($req, $res) {
+        $StudentController = new StudentController($req, $res);   
+        $StudentController->removeByid();
     });
 
     
@@ -86,13 +91,9 @@
 
     
     
-    $app->delete("/:user_name", function ($req, $res) {
-        $deleteResult = deleteTable(" user_name = ". $req["params"]["user_name"] ,"Student");
-        if($deleteResult["Success"]){
-            $res->send(200, getTableWhen(" user_name = ". $req["params"]["user_name"] ,"Student"));
-        }else{
-        $res->send(400, '{"err": $deleteResult["Message"]}');
-        }
+    $app->delete("/deleteByusername/:username", function ($req, $res) {
+        $StudentController = new StudentController($req, $res);   
+        $StudentController->removeByusername();
     });
 
     
@@ -100,13 +101,9 @@
 
     
     
-    $app->delete("/:pass_word", function ($req, $res) {
-        $deleteResult = deleteTable(" pass_word = ". $req["params"]["pass_word"] ,"Student");
-        if($deleteResult["Success"]){
-            $res->send(200, getTableWhen(" pass_word = ". $req["params"]["pass_word"] ,"Student"));
-        }else{
-        $res->send(400, '{"err": $deleteResult["Message"]}');
-        }
+    $app->delete("/deleteBypassword/:password", function ($req, $res) {
+        $StudentController = new StudentController($req, $res);   
+        $StudentController->removeBypassword();
     });
 
     

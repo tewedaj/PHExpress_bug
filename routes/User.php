@@ -1,84 +1,81 @@
 <?php
-        
-        //auto generated file 
+    include "./controller/UserController.php";
+    //auto generated file 
  
-        
-        $app = new phexpress();
-        $app->setParent("User");
+    
+    $app = new phexpress();
+    $app->setParent("User");
 
-        
+    
     $app->get("/", function ($req, $res) {
-        $res->send(200, getTable("User"));
+        $UserController = new UserController($req, $res);   
+        $UserController->getUser();
     });
      
  
  
-        
-    $app->get("/:id", function ($req, $res) {
-        $res->send(200, getTableWhen(" id = ". $req["params"]["id"] ,"User"));
-    });
-     
- 
-
-        
     
-    $app->get("/get_By_id/:id", function ($req, $res) {
-        $res->send(200, getTableWhen(" id = '".$req["params"]["id"]."' " ,"User"));
+    
+    $app->get("/getByid/:id", function ($req, $res) {
+        $UserController = new UserController($req, $res);   
+        $UserController->getByid();
     });
 
     
     
-    $app->get("/get_By_user_name/:username", function ($req, $res) {
-        $res->send(200, getTableWhen(" user_name = '".$req["params"]["username"]."' " ,"User"));
+    $app->get("/getByusername/:username", function ($req, $res) {
+        $UserController = new UserController($req, $res);   
+        $UserController->getByusername();
     });
 
     
     
     $app->get("/getBypassword/:password", function ($req, $res) {
-        $res->send(200, getTableWhen(" pass_word = '".$req["params"]["password"]."' " ,"User"));
+        $UserController = new UserController($req, $res);   
+        $UserController->getBypassword();
     });
 
      
  
 
-        
+    
      
         $app->post("/",function ($req, $res){
-            $res->send(200,insertInto("User",$req["body"]));
+            $UserController = new UserController($req, $res);   
+            $UserController->setUser();
         });
      
  
 
-        
     
-    $app->patch("/getByid/:id", function ($req, $res) {
-        updateWhen(" id = ". $req["params"]["id"] ,"User",$req["body"]);
+    
+    $app->patch("/updateByid/:id", function ($req, $res) {
+        $UserController = new UserController($req, $res);   
+        $UserController->updateByid();
     });
 
     
     
-    $app->patch("/getByusername/:username", function ($req, $res) {
-        updateWhen(" user_name = ". $req["params"]["username"] ,"User",$req["body"]);
+    $app->patch("/updateByusername/:username", function ($req, $res) {
+        $UserController = new UserController($req, $res);   
+        $UserController->updateByusername();
     });
 
     
     
-    $app->patch("/getBypassword/:password", function ($req, $res) {
-        updateWhen(" pass_word = ". $req["params"]["password"] ,"User",$req["body"]);
+    $app->patch("/updateBypassword/:password", function ($req, $res) {
+        $UserController = new UserController($req, $res);   
+        $UserController->updateBypassword();
     });
 
      
  
 
-        
     
-    $app->delete("/getByid/:id", function ($req, $res) {
-        $deleteResult = deleteTable(" id = ". $req["params"]["id"] ,"User");
-        if($deleteResult["Success"]){
-            $res->send(200, '{"success": true}');
-        }else{
-        $res->send(400, '{"err": $deleteResult["Message"]}');
-        }
+    
+    $app->delete("/deleteByid/:id", function ($req, $res) {
+        $UserController = new UserController($req, $res);   
+        $UserController->removeByid();
     });
 
     
@@ -86,13 +83,9 @@
 
     
     
-    $app->delete("/getByusername/:username", function ($req, $res) {
-        $deleteResult = deleteTable(" user_name = ". $req["params"]["username"] ,"User");
-        if($deleteResult["Success"]){
-            $res->send(200, '{"success": true}');
-        }else{
-        $res->send(400, '{"err": $deleteResult["Message"]}');
-        }
+    $app->delete("/deleteByusername/:username", function ($req, $res) {
+        $UserController = new UserController($req, $res);   
+        $UserController->removeByusername();
     });
 
     
@@ -100,13 +93,9 @@
 
     
     
-    $app->delete("/getBypassword/:password", function ($req, $res) {
-        $deleteResult = deleteTable(" pass_word = ". $req["params"]["password"] ,"User");
-        if($deleteResult["Success"]){
-            $res->send(200, '{"success": true}');
-        }else{
-        $res->send(400, '{"err": $deleteResult["Message"]}');
-        }
+    $app->delete("/deleteBypassword/:password", function ($req, $res) {
+        $UserController = new UserController($req, $res);   
+        $UserController->removeBypassword();
     });
 
     
@@ -114,4 +103,4 @@
 
     
 
-        
+    

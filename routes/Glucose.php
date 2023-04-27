@@ -1,5 +1,5 @@
 <?php
-        
+        include "./controller/GlucoseController.php";
         //auto generated file 
  
         
@@ -8,46 +8,53 @@
 
         
     $app->get("/", function ($req, $res) {
-        $res->send(200, getTable("Glucose"));
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->getGlucose();
     });
      
  
  
         
     $app->get("/:id", function ($req, $res) {
-        $res->send(200, getTableWhen(" id = ". $req["params"]["id"] ,"Glucose"));
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->getGlucose();
     });
      
  
 
         
     
-    $app->get("/:id", function ($req, $res) {
-        $res->send(200, getTableWhen(" id = ". $req["params"]["id"] ,"Glucose"));
+    $app->get("/getByid/:id", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->getByid();
     });
 
     
     
-    $app->get("/:user_id", function ($req, $res) {
-        $res->send(200, getTableWhen(" user_id = ". $req["params"]["user_id"] ,"Glucose"));
+    $app->get("/getByuserid/:userid", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->getByuserid();
     });
 
     
     
-    $app->get("/:mg_dl", function ($req, $res) {
-        $res->send(200, getTableWhen(" mg_dl = ". $req["params"]["mg_dl"] ,"Glucose"));
+    $app->get("/getBymgdl/:mgdl", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->getBymgdl();
     });
 
     
     
-    $app->get("/:carb", function ($req, $res) {
-        $res->send(200, getTableWhen(" carb = ". $req["params"]["carb"] ,"Glucose"));
+    $app->get("/getBycarb/:carb", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->getBycarb();
     });
 
     
     
-    $app->get("/:insuline", function ($req, $res) {
-        $res->send(200, getTableWhen(" insuline = ". $req["params"]["insuline"] ,"Glucose"));
+    $app->get("/getByinsuline/:insuline", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->getByinsuline();
     });
 
      
@@ -56,39 +63,45 @@
         
      
         $app->post("/",function ($req, $res){
-            $res->send(200,insertInto("Glucose",$req["body"]));
+            $GlucoseController = new GlucoseController($req, $res);   
+            $GlucoseController->setGlucose();
         });
      
  
 
         
     
-    $app->patch("/:id", function ($req, $res) {
-        updateWhen(" id = ". $req["params"]["id"] ,"Glucose",$req["body"]);
+    $app->patch("/updateByid/:id", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->updateByid();
     });
 
     
     
-    $app->patch("/:user_id", function ($req, $res) {
-        updateWhen(" user_id = ". $req["params"]["user_id"] ,"Glucose",$req["body"]);
+    $app->patch("/updateByuserid/:userid", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->updateByuserid();
     });
 
     
     
-    $app->patch("/:mg_dl", function ($req, $res) {
-        updateWhen(" mg_dl = ". $req["params"]["mg_dl"] ,"Glucose",$req["body"]);
+    $app->patch("/updateBymgdl/:mgdl", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->updateBymgdl();
     });
 
     
     
-    $app->patch("/:carb", function ($req, $res) {
-        updateWhen(" carb = ". $req["params"]["carb"] ,"Glucose",$req["body"]);
+    $app->patch("/updateBycarb/:carb", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->updateBycarb();
     });
 
     
     
-    $app->patch("/:insuline", function ($req, $res) {
-        updateWhen(" insuline = ". $req["params"]["insuline"] ,"Glucose",$req["body"]);
+    $app->patch("/updateByinsuline/:insuline", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->updateByinsuline();
     });
 
      
@@ -96,13 +109,9 @@
 
         
     
-    $app->delete("/:id", function ($req, $res) {
-        $deleteResult = deleteTable(" id = ". $req["params"]["id"] ,"Glucose");
-        if($deleteResult["Success"]){
-            $res->send(200, getTableWhen(" id = ". $req["params"]["id"] ,"Glucose"));
-        }else{
-        $res->send(400, '{"err": $deleteResult["Message"]}');
-        }
+    $app->delete("/deleteByid/:id", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->removeByid();
     });
 
     
@@ -110,13 +119,9 @@
 
     
     
-    $app->delete("/:user_id", function ($req, $res) {
-        $deleteResult = deleteTable(" user_id = ". $req["params"]["user_id"] ,"Glucose");
-        if($deleteResult["Success"]){
-            $res->send(200, getTableWhen(" user_id = ". $req["params"]["user_id"] ,"Glucose"));
-        }else{
-        $res->send(400, '{"err": $deleteResult["Message"]}');
-        }
+    $app->delete("/deleteByuserid/:userid", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->removeByuserid();
     });
 
     
@@ -124,13 +129,9 @@
 
     
     
-    $app->delete("/:mg_dl", function ($req, $res) {
-        $deleteResult = deleteTable(" mg_dl = ". $req["params"]["mg_dl"] ,"Glucose");
-        if($deleteResult["Success"]){
-            $res->send(200, getTableWhen(" mg_dl = ". $req["params"]["mg_dl"] ,"Glucose"));
-        }else{
-        $res->send(400, '{"err": $deleteResult["Message"]}');
-        }
+    $app->delete("/deleteBymgdl/:mgdl", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->removeBymgdl();
     });
 
     
@@ -138,13 +139,9 @@
 
     
     
-    $app->delete("/:carb", function ($req, $res) {
-        $deleteResult = deleteTable(" carb = ". $req["params"]["carb"] ,"Glucose");
-        if($deleteResult["Success"]){
-            $res->send(200, getTableWhen(" carb = ". $req["params"]["carb"] ,"Glucose"));
-        }else{
-        $res->send(400, '{"err": $deleteResult["Message"]}');
-        }
+    $app->delete("/deleteBycarb/:carb", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->removeBycarb();
     });
 
     
@@ -152,13 +149,9 @@
 
     
     
-    $app->delete("/:insuline", function ($req, $res) {
-        $deleteResult = deleteTable(" insuline = ". $req["params"]["insuline"] ,"Glucose");
-        if($deleteResult["Success"]){
-            $res->send(200, getTableWhen(" insuline = ". $req["params"]["insuline"] ,"Glucose"));
-        }else{
-        $res->send(400, '{"err": $deleteResult["Message"]}');
-        }
+    $app->delete("/deleteByinsuline/:insuline", function ($req, $res) {
+        $GlucoseController = new GlucoseController($req, $res);   
+        $GlucoseController->removeByinsuline();
     });
 
     

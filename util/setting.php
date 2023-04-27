@@ -1,10 +1,10 @@
 <?php
 
 $settings = [
-    "modelController"=> true, // should only be true in development 
-    "displayErrors" => true, //should only be true in development 
-    "databaseName" => "FinalTesting2", //Db name should be small latter
+    "modelController"=> true, 
+    "displayErrors" => true,  
+    "databaseName" => "FinalTesting2", 
     "server" => "localhost",
     "userName" => "root",
-    "serverPassword" => "",
+    "serverPassword" => ""
 ];
