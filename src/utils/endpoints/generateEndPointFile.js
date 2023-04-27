@@ -14,7 +14,6 @@ function generateEndPoints(modelName,modelDetail){
     $app->setParent("${modelName}");
 
     ${select(modelName)} \n \n 
-    ${selectById(modelName)} \n \n
     ${selectBy(modelName,modelDetail)} \n \n
     ${post(modelName,modelDetail)} \n \n
     ${updateBy(modelName,modelDetail)} \n \n

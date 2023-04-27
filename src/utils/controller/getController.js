@@ -9,11 +9,11 @@ function get(modelName){
     var response = `
     public function get${modelName}(){
         $response =  $this->getTable("${modelName}");
-        if(is_object($response)){
+        // if(is_object($response)){
             $this->response->send(200,$response);
-        }else {
-            $this->response->send(400,'{"success": false, "message": "Something Went Wrong"}');
-        }
+        // }else {
+        //     $this->response->send(400,'{"success": false, "message": "Something Went Wrong"}');
+        // }
     }
     `
     return response;
