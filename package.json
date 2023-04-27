@@ -20,6 +20,10 @@
       {
         "command": "phexpress.PostManGenerator",
         "title": "PHExpress: PostManGenerator"
+      },
+      {
+        "command": "phexpress.UpScale",
+        "title": "PHExpress: UpScale"
       }
     ]
   },
