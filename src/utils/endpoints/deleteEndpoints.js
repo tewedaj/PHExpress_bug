@@ -8,13 +8,9 @@ function deleteBy(modelName, model) {
 
         response = response + `
     
-    $app->delete("/getBy${paramName}/:${paramName}", function ($req, $res) {
-        $deleteResult = deleteTable(" ${variable.name} = ". $req["params"]["${paramName}"] ,"${modelName}");
-        if($deleteResult["Success"]){
-            $res->send(200, '{"success": true}');
-        }else{
-        $res->send(400, '{"err": $deleteResult["Message"]}');
-        }
+    $app->delete("/deleteBy${paramName}/:${paramName}", function ($req, $res) {
+        $${modelName}Controller = new ${modelName}Controller($req, $res);   
+        $${modelName}Controller->removeBy${paramName}();
     });
 
     \n \n

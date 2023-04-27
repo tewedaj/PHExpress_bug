@@ -5,7 +5,8 @@
 function select(modelName){
     var response = `
     $app->get("/", function ($req, $res) {
-        $res->send(200, getTable("${modelName}"));
+        $${modelName}Controller = new ${modelName}Controller($req, $res);   
+        $${modelName}Controller->get${modelName}();
     });
     `;
 
@@ -17,7 +18,8 @@ function select(modelName){
 function selectById(modelName){
     var response = `
     $app->get("/:id", function ($req, $res) {
-        $res->send(200, getTableWhen(" id = ". $req["params"]["id"] ,"${modelName}"));
+        $${modelName}Controller = new ${modelName}Controller($req, $res);   
+        $${modelName}Controller->get${modelName}();
     });
     `;
     return response;
@@ -31,7 +33,8 @@ function selectBy(modelName,model){
     response = response +  `
     
     $app->get("/getBy${paramName}/:${paramName}", function ($req, $res) {
-        $res->send(200, getTableWhen(" ${variable.name} = '".$req["params"]["${paramName}"]."' " ,"${modelName}"));
+        $${modelName}Controller = new ${modelName}Controller($req, $res);   
+        $${modelName}Controller->getBy${paramName}();
     });
 
     `;

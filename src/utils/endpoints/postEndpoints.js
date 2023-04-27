@@ -13,7 +13,8 @@ function post(modelName,modelDetail){
     return `
      
         $app->post("/",function ($req, $res){
-            $res->send(200,insertInto("${modelName}",$req["body"]));
+            $${modelName}Controller = new ${modelName}Controller($req, $res);   
+            $${modelName}Controller->set${modelName}();
         });
     `;
 }

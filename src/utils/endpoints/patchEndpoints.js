@@ -5,8 +5,9 @@ function updateBy(modelName,model){
 
     response = response +  `
     
-    $app->patch("/getBy${paramName}/:${variable.name.split("_").join("")}", function ($req, $res) {
-        updateWhen(" ${variable.name} = ". $req["params"]["${paramName}"] ,"${modelName}",$req["body"]);
+    $app->patch("/updateBy${paramName}/:${variable.name.split("_").join("")}", function ($req, $res) {
+        $${modelName}Controller = new ${modelName}Controller($req, $res);   
+        $${modelName}Controller->updateBy${paramName}();
     });
 
     `;
