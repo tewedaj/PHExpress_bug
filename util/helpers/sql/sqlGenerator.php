@@ -341,6 +341,7 @@ class ORM
         }';
         }
         invalidateCache($tableName);
+
     }
 
     public function updateWhen($condition, $tableName, $body)

@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 include "./db/connection.php";
 require "./db/initialize.php";
 include "./util/phexpress.php";
+include "./util/helpers/extra/cors.php";
 
 
 include "./util/helpers/interface/response.php";
@@ -25,13 +26,14 @@ $settings["modelController"] ? include "./db/initialize.php" : "";
 
 //this will create all the tables if they don't exist
 
-
+cors();
 //Route imports
 
  
  
-include "./routes/User.php"; 
- include "./routes/Glucose.php"; 
- include "./routes/models.php";  
+ include "./routes/User.php"; 
  include "./routes/Student.php"; 
- include "./routes/UserController.php";
+ include "./routes/Teacher.php"; 
+ include "./routes/TestModel2.php"; 
+ include "./routes/TestModel3.php"; 
+ include "./routes/Tracker.php";

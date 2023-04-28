@@ -25,8 +25,8 @@ try {
    
     if(findTable($modelName,$response,$size) == false){
   $modelDetail =  getModelStructure($file);
-
-  $sqlQueries .= createTable(str_replace(".php","",$file), $modelDetail) ;
+    $orm = new ORM();
+  $sqlQueries .= $orm->createTable(str_replace(".php","",$file), $modelDetail) ;
   // $listOfQuery[$x] = createTable(str_replace(".php","",$file), $modelDetail);
 
 }

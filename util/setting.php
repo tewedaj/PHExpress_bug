@@ -3,7 +3,7 @@
 $settings = [
     "modelController"=> true, 
     "displayErrors" => true,  
-    "databaseName" => "FinalTesting2", 
+    "databaseName" => "AlxDemo", 
     "server" => "localhost",
     "userName" => "root",
     "serverPassword" => ""
