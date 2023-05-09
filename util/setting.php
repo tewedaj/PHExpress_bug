@@ -3,7 +3,7 @@
 $settings = [
     "modelController"=> true, 
     "displayErrors" => true,  
-    "databaseName" => "AlxDemo", 
+    "databaseName" => "Fitrsum", 
     "server" => "localhost",
     "userName" => "root",
     "serverPassword" => ""
